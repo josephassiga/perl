@@ -1,0 +1,24 @@
+1 octet :
+	- 1 bit si 1 => serveur
+			si 0 => client
+	- 1 bit si 1 => broadcast
+			si 0 => normal
+	- 6 bit à zéro
+
+2 octets : identifiant discussion
+2 octets : identifiant message
+options :
+	1 octet :
+		2 bit type option *
+		8 bit taille option
+
+1 octet : tout à 0 => fin option
+2 octets : taille du body
+||
+\/ reste octets : payload
+
+* option :
+	00 fin
+	01 cle=valeur
+	10 chaine
+	11 nombre

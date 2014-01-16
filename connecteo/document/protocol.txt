@@ -1,0 +1,80 @@
+Deux protocoles reseaux:
+
+********************************************
+* SeP=> Super Evenement Protocol(UDP 2013) *
+********************************************
+
+Chaque machine+le serveur auront un serveur Sep ouvert.
+Protocole evenementielle qui ne servira qu'a recevoir et envoyer des petits evenements.
+si un seul des messages est perdu entre temps, la discussion est rompue et repart de zéro.
+
+1-decouverte:
+	a)serveur
+		le serveur BROADCAST un [ping] sur tout le reseau.
+		les machines clientes repondent par un [echo].
+		le serveur envoie un [OK]
+		la machine cliente envoie un [identifie{addressMAC}]
+		le serveur envoie a la machine un [identifiant{hash}]
+		la machine cliente repond par un [OK]
+	b)machine cliente
+		une nouvelle machine cliente envoie un [ping] au serveur
+		le serveur repond par un [echo].
+		la machine cliente envoie un [identifie{addressMAC}]
+		le serveur envoie a la machine un [identifiant{hash}]
+		la machine cliente repond par un [OK]
+
+2-en vie(tous les temps X):
+	a)serveur
+		le serveur BROADCAST un [ping]
+		les machines ne repondant pas sont mortes(eteintes ou erreur) ou de nouvelles repondent par [echo] (discussion qui commence).
+	b)machine cliente
+		la machine cliente B envoie un [ping] au serveur
+		il repond par un [echo] c'est bon,sinon il est mort(eteint ou erreur)
+
+3-demande programme:
+	le serveur envoie a la machine un [possede{nomProg+verProg}]
+	si la machine repond par un [oui] alors le serveur envoie[rien]
+	si la machine repond par un [non] alors voir 5-installation
+
+4-demande liste programme:
+	le serveur envoie a la machine un [dliste]
+	la machine repond par [OK]
+	voir SiP-b
+
+5-envoie liste:
+	la machine envoie un [vliste] au serveur
+	le serveur repond par [OK]
+	voir SiP-b
+	
+6-installation:
+	le serveur envoie a la machine un [install]
+	voir SiP-a
+	la machine envoie [reussi] si l'installation a reussie sinon un [rate]
+	le serveur repond par [OK]
+
+7-suppression:
+	le serveur envoie a la machine TOTO un [suppression]
+	voir SiP
+	la machine envoie [reussi] si la suppression a reussie sinon un [rate]
+	le serveur repond par [OK]
+	
+8-mise a jour:
+	installation + mise a jour
+
+***********************************************
+* SiP=> Super Installation Protocol(TCP 3615) *
+***********************************************
+Ce protocole va permettre de transferer des fichiers du serveur au client et inversement de facon occasionnel
+
+a) telechargement d'un programme
+	Pour installer les logiciels sur les autres machines,le serveur va prendre les informations necessaires et les zippermum dans un fichier A.ieo.
+	Des la reception complete du fichier A.ieo la machine cliente va installer sur elle meme les infos.
+	L'application sera disponible.
+
+	Lorsque la machine a eu l'ordre d'installer un logiciel A
+	Celle ci va creer une connexion Sip pour telecharger le fichier A.ieo . Des la fin du telechargement la connexion se ferme.
+
+b) envoie d'une liste de programme
+	Lorsque la machine a eu l'ordre de presenter sa liste de prog
+	La machine va creer un fichier B.peo qui va contenir sa liste de prog installé.
+	Celle ci va creer une connexion Sip pour uploader le fichier B.peo . Des la fin de l'upload la connexion se ferme.

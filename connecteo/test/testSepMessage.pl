@@ -1,0 +1,20 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use IO::Socket::INET;
+use Connecteo::Reseau::SepMessage;
+use bytes;
+my $message=Connecteo::Reseau::SepMessage->new(1,1);
+$message->addParametre("dico","toto=content");
+$message->addParametre("nbre",2);
+$message->setBody("sfdsqfdsqf");
+$message->affiche();
+# my $s=pack "C*",128;
+# print "*".$s."*\n";
+# my $d=unpack "C*",$s;
+# print "*$d*\n";
+print $message->compile()."\n";
+my $newmessage=Connecteo::Reseau::SepMessage->new();
+$newmessage->populate($message->compile());
+print "\n\n****\n\n";
+$newmessage->affiche();

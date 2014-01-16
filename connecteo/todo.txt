@@ -1,0 +1,10 @@
+base de registre
+	[fait]detection
+	[fait]sauvegarde
+	[fait]deploiement
+dossier
+	detection
+	sauvegarde dans fichier tar.gz
+	deploiement
+CGI
+Serveur SeP et SiP

@@ -1,0 +1,34 @@
+[
+	{
+		"nom": ".3gppa/toto/titi",
+		"cle": [
+			{
+				"nom": "projet",
+				"cle": [],
+				"value": {
+					"BI": {
+						"drwho": "6c652066657a20632765737420636f6f6c20212121"
+					}
+				}
+			}
+		],
+		"value": {
+			"SZ": {
+				"ghs": "VLC.3gpp",
+				"toto": "il est content"
+			},
+			"DW": {
+				"autre": "0x00000042"
+			}
+		}
+	},
+	{
+		"nom":".3gpp4",
+		"cle":[],
+		"value":{
+			"SZ":{
+				"":"hello"
+			}
+		}
+	}
+]
